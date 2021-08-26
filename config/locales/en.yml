@@ -175,3 +175,7 @@ en:
   support:
     header: Supported Buying Admin
 
+    cases:
+      show:
+        button:
+          back: Back to case list

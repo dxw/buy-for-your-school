@@ -1,4 +1,3 @@
-
 <h1 class="govuk-heading-xl">All cases</h1>
 
 <div class="govuk-grid-row">
@@ -20,7 +19,7 @@
         </thead>
         <tbody class="govuk-table__body">
           <% @cases.each do |support_case| %>
-            <%= render "row", support_case: support_case %>
+            <%= render "index_case", support_case: support_case %>
           <% end %>
         </tbody>
       </table>
