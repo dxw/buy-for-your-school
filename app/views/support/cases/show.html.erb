@@ -1,10 +1,10 @@
-<%= link_to I18n.t("support.cases.show.button.back"), dashboard_path, class: "govuk-back-link" %>
+<%= link_to I18n.t("support.cases.show.button.back"), support_cases_path, class: "govuk-back-link" %>
 
 <h1 class="govuk-heading-l govuk-!-margin-bottom-0">
   <%= @case.organisation %>
 </h1>
 <strong class="govuk-tag govuk-tag--green govuk-!-margin-bottom-7 ">
-  <%= @case.status %>
+  <%= @case.state %>
 </strong>
 
 <div class="govuk-tabs" data-module="govuk-tabs">
@@ -62,7 +62,7 @@
 
   <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="request-details">
     <dl class="govuk-summary-list govuk-!-margin-bottom-5">
-      <p>Request sent on <%= @case.history_events.first.created_at.strftime("%e %B %Y") %></p>
+      <p>Request sent on <%= @case.history_events.first.created_at %></p>
       <%= render "show_history_event", event: @case.history_events.first %>
     </dl>
   </div>

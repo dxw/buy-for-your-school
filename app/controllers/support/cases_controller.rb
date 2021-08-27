@@ -1,15 +1,15 @@
+# TODO: remove :nocov: and start testing
+# :nocov:
 module Support
   class CasesController < ApplicationController
-  #class CasesController < ActionController::Base
     def index
-      @cases = Support::Cases::Index.new.call
+      @cases = Support::Case.all.map { |c| CasePresenter.new(c) }
     end
 
     def show
-      @case = Support::Cases::Show.new(id: sanitised_id).call
-    end
+      c = Support::Case.find_by(id: sanitised_id)
 
-    def update
+      @case = CasePresenter.new(c)
     end
 
     private
@@ -19,3 +19,4 @@ module Support
     end
   end
 end
+# :nocov:
