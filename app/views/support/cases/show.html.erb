@@ -1,0 +1,101 @@
+<%= link_to I18n.t("support.cases.show.button.back"), support_cases_path, class: "govuk-back-link" %>
+
+<h1 class="govuk-heading-l govuk-!-margin-bottom-0">
+  <%= @case.organisation %>
+</h1>
+<strong class="govuk-tag govuk-tag--green govuk-!-margin-bottom-7 ">
+  <%= @case.state %>
+</strong>
+
+<div class="govuk-tabs" data-module="govuk-tabs">
+  <h2 class="govuk-tabs__title">
+    Contents
+  </h2>
+  <ul class="govuk-tabs__list">
+    <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+      <a class="govuk-tabs__tab" href="#school-details">
+        School details
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#request-details">
+        Request details
+      </a>
+    </li>
+    <li class="govuk-tabs__list-item">
+      <a class="govuk-tabs__tab" href="#case-history">
+        Case history
+      </a>
+    </li>
+  </ul>
+
+  <div class="govuk-tabs__panel" id="school-details" role="tabpanel" aria-labelledby="tab_school-details">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-5">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Contact name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <%= @case.contact_name %>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Contact phone
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <%= @case.contact_phone %>
+        </dd>
+      </div>
+      
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Contact email
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <%= @case.contact_email %>
+        </dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="request-details">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-5">
+      <p>Request sent on <%= @case.history_events.first.created_at %></p>
+      <%= render "show_history_event", event: @case.history_events.first %>
+    </dl>
+  </div>
+
+  <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="case-history">
+    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+      <% @case.history_events.each do |event| %>
+        <div class="govuk-accordion__section ">
+          <div class="govuk-accordion__section-header">
+            <h2 class="govuk-accordion__section-heading">
+              <span class="govuk-accordion__section-button" id="accordion-default-heading-1">
+                <%= event.type %>
+              </span>
+            </h2>
+            <div class="govuk-accordion__section-summary govuk-body" id="accordion-with-summary-sections-summary-1">
+              <%= event.created_at %>
+            </div>
+          </div>
+          <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+            <%= render "show_history_event", event: event %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<h3 class="govuk-heading-m">Actions</h3>
+
+<ul class="govuk-list">
+  <li>
+    <a class="govuk-link govuk-link--no-visited-state" href="#">
+      Assign to case worker
+    </a>
+  </li>
+</ul>
