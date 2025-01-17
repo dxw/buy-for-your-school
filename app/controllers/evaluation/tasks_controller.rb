@@ -1,6 +1,7 @@
 module Evaluation
   class TasksController < ApplicationController
     before_action :set_current_case
+    before_action :current_evaluator
     before_action :check_user_is_evaluator
     before_action :set_uploaded_documents
     before_action :set_downloaded_documents
