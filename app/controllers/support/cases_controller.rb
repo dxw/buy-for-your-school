@@ -3,8 +3,8 @@ module Support
     require "will_paginate/array"
     before_action :filter_forms, only: %i[index]
     before_action :current_case, only: %i[show]
-    before_action :set_evaluation_status
-    before_action :enable_evaluation_link
+    before_action :set_evaluation_status, only: %i[show]
+    before_action :enable_evaluation_link, only: %i[show]
 
     helper_method :tower_tab_params
 
