@@ -43,6 +43,12 @@ describe "Agent can review evaluations", :js, :with_csrf_protection do
 
     click_button "Continue"
 
+    approval_email = Email.last
+
+    expect(Email.count).to eq(2)
+
+    expect(approval_email.subject).to eq("Case #{support_case.ref} - email notification of evaluation being approved")
+
     visit edit_support_case_review_evaluation_path(support_case)
 
     expect(find_all(".govuk-checkboxes__input")[0]).to be_checked
